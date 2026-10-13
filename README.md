@@ -16,7 +16,7 @@ This repository implements the eleven projects of the
 specified to the byte by the curriculum and verified by its black-box tests on Linux, macOS,
 and Windows.
 
-**Status:** repository and toolchain ready; no projects implemented yet.
+**Status:** Implemented projects: 00-hello-world
 
 ## PHP at a glance
 
@@ -37,7 +37,22 @@ and Windows.
 | Container image | `php:8.5-cli-trixie (+ composer:2)`, pinned by digest ([`Containerfile`](Containerfile)) |
 | Native CI | shivammathur/setup-php (8.5, Composer) |
 
-`make toolchain` verifies that the container and native toolchains are on this release line.
+`make toolchain` verifies that the container and native toolchains are on this release line
+and that Composer is present.
+
+Each project is a Composer project (`composer.json` + `composer.lock` in its directory) whose
+locked development tools are installed into its `vendor/` by the make targets:
+
+| Purpose | Tool | Make target |
+| :-- | :-- | :-- |
+| Unit tests | PHPUnit | `make test` |
+| Lint | `php -l`, PHPStan (level max), PHP-CS-Fixer `check` | `make lint` |
+| Format | PHP-CS-Fixer `fix` | `make format` |
+
+The tools run as `php vendor/bin/<tool>` (no `.bat` shims), and the versions are pinned exactly,
+so the container and every native OS use the same ones. The tools themselves (`dp-hello`, …)
+need only `php` at run time. They are `#!/usr/bin/env php` scripts: on Windows, run them from
+Git Bash or MSYS2, which honor `#!` lines.
 
 ## Layout
 

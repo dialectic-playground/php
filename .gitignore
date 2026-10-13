@@ -10,3 +10,10 @@ __pycache__/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Repository-specific: Composer dependencies and PHP tool caches
+vendor/
+.phpunit.cache/
+.phpstan.cache/
+.php-cs-fixer.cache
+coverage/

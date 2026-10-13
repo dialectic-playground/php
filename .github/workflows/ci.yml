@@ -77,6 +77,7 @@ jobs:
         with:
           php-version: '8.5'
           tools: composer
+          coverage: none
 
       - name: make check roundtrip
         run: make check roundtrip
