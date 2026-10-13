@@ -53,7 +53,8 @@ check-repository:
 toolchain:
 	python3 --version || python --version
 	make --version | head -1
-	php -r 'echo PHP_VERSION, PHP_EOL;' | tee /dev/stderr | grep -q '^8\.5\.'
+	@version="$$(php -r 'echo PHP_VERSION, PHP_EOL;')"; echo "$$version"; echo "$$version" | grep -q '^8\.5\.' \
+		|| { echo "toolchain: expected a version matching ^8\.5\." >&2; exit 1; }
 	composer --version 2>/dev/null | head -1
 
 projects:
