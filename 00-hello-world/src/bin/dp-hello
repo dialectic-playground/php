@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * dp-hello launcher: loads the library next to this file (no Composer needed at run time),
+ * runs the pure core, and writes its outcome.
+ */
+
+declare(strict_types=1);
+
+use DialecticPlayground\Hello\Cli;
+use DialecticPlayground\Hello\Output;
+
+ini_set('display_errors', 'stderr');
+
+spl_autoload_register(static function (string $class): void {
+    $prefix = 'DialecticPlayground\Hello\\';
+    if (str_starts_with($class, $prefix)) {
+        require __DIR__.'/../lib/'.str_replace('\\', '/', substr($class, strlen($prefix))).'.php';
+    }
+});
+
+// The command-line arguments without the program name (php-cli always registers argv).
+$arguments = [];
+foreach (array_slice((array) ($_SERVER['argv'] ?? []), 1) as $argument) {
+    if (is_string($argument)) {
+        $arguments[] = $argument;
+    }
+}
+
+exit(Output::emit(Cli::run($arguments), STDOUT, STDERR));

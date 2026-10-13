@@ -1,5 +1,5 @@
 # Keeps GitHub Actions (SHA-pinned) and the toolchain image digest current.
-# Package ecosystems (Composer) are added when the first project's manifests exist.
+# Composer: the locked development tools of each implemented project.
 version: 2
 updates:
   - package-ecosystem: github-actions
@@ -23,3 +23,13 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+  - package-ecosystem: composer
+    directory: /00-hello-world
+    schedule:
+      interval: weekly
+    groups:
+      composer-dev:
+        dependency-type: development
+    commit-message:
+      prefix: build

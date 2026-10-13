@@ -13,7 +13,7 @@
 
 # Project directories whose implementation is complete enough to build and test, in
 # curriculum order (for example: 00-hello-world 01-echo). CI covers exactly these.
-IMPLEMENTED :=
+IMPLEMENTED := 00-hello-world
 
 DP_HOST_GOALS += help roundtrip
 include tools/container.mk
@@ -42,19 +42,22 @@ check-repository:
 	done; \
 	marker="TEMPLATE"; marker="$$marker:"; \
 	if grep -rn --exclude-dir=.git --exclude-dir=.github --exclude-dir=tools \
-	        --exclude-dir=$(CURRICULUM_ROOT) "$$marker" .; then \
+	        --exclude-dir=$(CURRICULUM_ROOT) --exclude-dir=vendor "$$marker" .; then \
 		echo "replace every $$marker marker listed above"; status=1; \
 	fi; \
 	[ $$status -eq 0 ] && echo "repository: standard files, $(CURRICULUM_ROOT), and project workspaces present"; \
 	exit $$status
 
 # Prints each tool's version and fails unless it is on the repository's release line
-# (PHP 8.5), so the container image and the native CI toolchains stay in step.
+# (PHP 8.5), so the container image and the native CI toolchains stay in step. PHPUnit,
+# PHPStan, and PHP-CS-Fixer come from each project's composer.lock, so they are the same
+# versions everywhere; only Composer itself must be present.
 toolchain:
 	python3 --version || python --version
 	make --version | head -1
 	@version="$$(php -r 'echo PHP_VERSION, PHP_EOL;')"; echo "$$version"; echo "$$version" | grep -q '^8\.5\.' \
 		|| { echo 'toolchain: expected a version matching ^8\.5\.' >&2; exit 1; }
+	@command -v composer >/dev/null || { echo 'toolchain: composer is not installed' >&2; exit 1; }
 	composer --version 2>/dev/null | head -1
 
 projects:
