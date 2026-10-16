@@ -1,28 +1,28 @@
 {
-    "name": "dialectic-playground/php-00-hello-world",
-    "description": "dp-hello: the curriculum's Standard Terminal Hello World, in PHP",
-    "type": "project",
-    "license": "MIT",
-    "require": {
-        "php": "^8.5"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.95.27",
-        "phpstan/phpstan": "2.3.1",
-        "phpunit/phpunit": "13.4.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "DialecticPlayground\\Hello\\": "src/lib/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "DialecticPlayground\\Hello\\Tests\\": "src/tests/"
-        }
-    },
-    "config": {
-        "sort-packages": true,
-        "optimize-autoloader": true
+  "name": "dialectic-playground/php-00-hello-world",
+  "description": "dp-hello: the curriculum's Standard Terminal Hello World, in PHP",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": "^8.5"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "3.95.27",
+    "phpstan/phpstan": "2.3.1",
+    "phpunit/phpunit": "13.4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "DialecticPlayground\\Hello\\": "src/lib/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DialecticPlayground\\Hello\\Tests\\": "src/tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
 }
