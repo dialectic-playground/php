@@ -8,6 +8,9 @@ FROM docker.io/library/php:8.5-cli-trixie@sha256:01a109229f4465bc9ef042d9198f09a
 
 COPY --from=docker.io/library/composer:2@sha256:af98f42dfff7c68ba8d53c2164fd9fde1087b7d449514baa38c418b1f6bc4bac /usr/bin/composer /usr/local/bin/composer
 
+# Debian keeps only the current version of each package, so apt versions cannot be pinned
+# reproducibly; the base image is pinned by digest instead.
+# hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends make python3 git unzip \
     && rm -rf /var/lib/apt/lists/*
