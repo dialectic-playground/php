@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [php](#php)
+  - [PHP at a glance](#php-at-a-glance)
+  - [Toolchain](#toolchain)
+  - [Layout](#layout)
+  - [Development](#development)
+  - [Implementing a project](#implementing-a-project)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dialectic-playground/.github/main/assets/php/dist/logo-dark.svg">
@@ -11,7 +27,7 @@ PHP implementation of the Dialectic Playground SDLC curriculum.
 
 📖 **Documentation:** <https://dialectic-playground.github.io/docs/reference/languages/php/>
 
-This repository implements the eleven projects of the
+This repository implements the fifty-three projects of the
 [SDLC curriculum](https://github.com/dialectic-playground/sdlc-curriculum) in PHP. Each project is
 specified to the byte by the curriculum and verified by its black-box tests on Linux, macOS,
 and Windows.
@@ -20,22 +36,22 @@ and Windows.
 
 ## PHP at a glance
 
-| Aspect | PHP |
-| :-- | :-- |
-| File extension | `.php` |
-| CLI classification | Included |
-| Image category | First-Class |
-| Access to OS primitives | High (via php-cli and standard streams) |
-| Entry-point mechanism | Engine wraps CLI context and exposes args via argv |
+| Aspect                  | PHP                                                |
+| :---------------------- | :------------------------------------------------- |
+| File extension          | `.php`                                             |
+| CLI classification      | Included                                           |
+| Image category          | First-Class                                        |
+| Access to OS primitives | High (via php-cli and standard streams)            |
+| Entry-point mechanism   | Engine wraps CLI context and exposes args via argv |
 
 ## Toolchain
 
-| | |
-| :-- | :-- |
-| Release line | PHP 8.5 |
-| Build / package tool | Composer |
-| Container image | `php:8.5-cli-trixie (+ composer:2)`, pinned by digest ([`Containerfile`](Containerfile)) |
-| Native CI | shivammathur/setup-php (8.5, Composer) |
+|                      |                                                                                          |
+| :------------------- | :--------------------------------------------------------------------------------------- |
+| Release line         | PHP 8.5                                                                                  |
+| Build / package tool | Composer                                                                                 |
+| Container image      | `php:8.5-cli-trixie (+ composer:2)`, pinned by digest ([`Containerfile`](Containerfile)) |
+| Native CI            | shivammathur/setup-php (8.5, Composer)                                                   |
 
 `make toolchain` verifies that the container and native toolchains are on this release line
 and that Composer is present.
@@ -43,11 +59,11 @@ and that Composer is present.
 Each project is a Composer project (`composer.json` + `composer.lock` in its directory) whose
 locked development tools are installed into its `vendor/` by the make targets:
 
-| Purpose | Tool | Make target |
-| :-- | :-- | :-- |
-| Unit tests | PHPUnit | `make test` |
-| Lint | `php -l`, PHPStan (level max), PHP-CS-Fixer `check` | `make lint` |
-| Format | PHP-CS-Fixer `fix` | `make format` |
+| Purpose    | Tool                                                | Make target   |
+| :--------- | :-------------------------------------------------- | :------------ |
+| Unit tests | PHPUnit                                             | `make test`   |
+| Lint       | `php -l`, PHPStan (level max), PHP-CS-Fixer `check` | `make lint`   |
+| Format     | PHP-CS-Fixer `fix`                                  | `make format` |
 
 The tools run as `php vendor/bin/<tool>` (no `.bat` shims), and the versions are pinned exactly,
 so the container and every native OS use the same ones. The tools themselves (`dp-hello`, …)
@@ -56,14 +72,14 @@ Git Bash or MSYS2, which honor `#!` lines.
 
 ## Layout
 
-| Path | Contents |
-| :--- | :--- |
-| `00-hello-world/` … `10-sys-monitor/` | One workspace per curriculum project: `Makefile` (with `DP_*` hooks), HLD, LLD, RTM, master test plan, and `src/` |
-| `sdlc-curriculum/` | The curriculum, as a git submodule pinned to a release tag |
-| `Makefile` | `make check` (repository, toolchain, implemented projects), `toolchain`, `projects`, `roundtrip` |
-| `Containerfile`, `.devcontainer/` | The toolchain image and the matching dev container |
-| `tools/dp-run`, `tools/container.mk` | Shared container tooling (copies of the canonical files in `dialectic-playground/.github`) |
-| `.github/workflows/ci.yml` | CI: container and native (Linux, macOS, Windows) `make` targets, shared-tooling check, DCO |
+| Path                                 | Contents                                                                                                          |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| `00-hello-world/` … `52-spacecraft/` | One workspace per curriculum project: `Makefile` (with `DP_*` hooks), HLD, LLD, RTM, master test plan, and `src/` |
+| `sdlc-curriculum/`                   | The curriculum, as a git submodule pinned to a release tag                                                        |
+| `Makefile`                           | `make check` (repository, toolchain, implemented projects), `toolchain`, `projects`, `roundtrip`                  |
+| `Containerfile`, `.devcontainer/`    | The toolchain image and the matching dev container                                                                |
+| `tools/dp-run`, `tools/container.mk` | Shared container tooling (copies of the canonical files in `dialectic-playground/.github`)                        |
+| `.github/workflows/ci.yml`           | CI: container and native (Linux, macOS, Windows) `make` targets, shared-tooling check, DCO                        |
 
 ## Development
 

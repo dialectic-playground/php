@@ -17,3 +17,5 @@ vendor/
 .phpstan.cache/
 .php-cs-fixer.cache
 coverage/
+
+node_modules/
