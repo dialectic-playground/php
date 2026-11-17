@@ -4,7 +4,7 @@
 # Official base image pinned by multi-architecture index digest, plus make and python3 (for the
 # curriculum's black-box runner). Dependabot (docker) refreshes the digest; moving to a new
 # release line is a deliberate change (keep `make toolchain` and the native CI in step).
-FROM docker.io/library/php:8.5-cli-trixie@sha256:01a109229f4465bc9ef042d9198f09a4d9da7775a825dbd8572dcdbd8756c4d3
+FROM docker.io/library/php:8.5-cli-trixie@sha256:50956f094e90a716d43bea28087d447555ad80510e386ab8c9c10d8c70d781a9
 
 COPY --from=docker.io/library/composer:2@sha256:af98f42dfff7c68ba8d53c2164fd9fde1087b7d449514baa38c418b1f6bc4bac /usr/bin/composer /usr/local/bin/composer
 
